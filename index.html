@@ -1,1 +1,93 @@
-<h1>Hello world</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Accessibility Tree Example</title>
+    <style>
+        /* Hide submenus by default */
+        [aria-expanded="false"] .sub-menu ~ ul {
+            display: none;
+        }
+        /* Show submenus when they are expanded */
+        [aria-expanded="true"] .sub-menu ~ ul {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+    <h1>Accessibility Tree Example</h1>
+    <p>User agents acquire information from the DOM and create a parallel structure called the accessibility tree, made up of accessible objects. An accessible object provides information about its role, states, and properties.</p>
+    <nav role="navigation" aria-label="Food menu">
+        <ul role="menu">
+            <li role="menuitem" aria-haspopup="true" aria-expanded="false">
+                <a href="#" class="sub-menu">Fruits</a>
+                <ul role="menu" aria-label="Fruits">
+                    <li role="menuitem"><a href="#">Apple</a></li>
+                    <li role="menuitem"><a href="#">Lemon</a></li>
+                </ul>
+            </li>
+            <li role="menuitem"><a href="#">Vegetables</a></li>
+            <li role="menuitem"><a href="#">Meat</a></li>
+        </ul>
+    </nav>
+
+    <nav aria-label="Players Menu">
+        <ul>
+            <li aria-haspopup="true" aria-expanded="false">
+                <a href="#" class="sub-menu">Footbal</a>
+                <ul role="menu" aria-label="Football players">
+                    <li><a href="#">Ronaldo</a></li>
+                    <li><a href="#">Valderrama</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Basketball</a></li>
+            <li><a href="#">Cricket</a></li>
+        </ul>
+    </nav>
+
+<div>
+  <button id="menubutton" aria-haspopup="true" aria-controls="menu">
+    <img src="hamburger.svg" alt="Page Sections" />
+  </button>
+  <ul id="menu" role="menu" aria-labelledby="menubutton">
+    <li role="presentation">
+      <a role="menuitem" href="#description">Description</a>
+    </li>
+    <li role="presentation">
+      <a
+        role="menuitem"
+        href="#associated_wai-aria_roles_states_and_properties">
+        Associated WAI-ARIA roles, states, and properties
+      </a>
+    </li>
+    <li role="presentation">
+      <a role="menuitem" href="#keyboard_interactions">
+        Keyboard interactions
+      </a>
+    </li>
+    <li role="presentation">
+      <a role="menuitem" href="#examples">Examples</a>
+    </li>
+    <li role="presentation">
+      <a role="menuitem" href="#specifications">Specifications</a>
+    </li>
+    <li role="presentation">
+      <a role="menuitem" href="#see_also">See Also</a>
+    </li>
+  </ul>
+</div>
+
+
+    <script>
+        function toggle_menu(event) {
+            event.preventDefault();
+            const menu_item = event.target.parentElement;
+            const is_expanded = menu_item.getAttribute('aria-expanded') === 'true';
+            menu_item.setAttribute('aria-expanded', !is_expanded);
+        }
+        document.querySelectorAll(".sub-menu").forEach( anchor => anchor.addEventListener('click', toggle_menu));
+    </script>
+</body>
+</html>
+
