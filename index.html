@@ -4,19 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Accessibility Tree Example</title>
-    <style>
-        /* Hide submenus by default */
-        [aria-expanded="false"] .sub-menu ~ ul {
-            display: none;
-        }
-        /* Show submenus when they are expanded */
-        [aria-expanded="true"] .sub-menu ~ ul {
-            display: block;
-        }
-    </style>
 </head>
-<body>
-    <h1>Accessibility Tree Example</h1>
+    <body>
+    <h1 class="text-red-50">Accessibility Tree Example</h1>
     <p>User agents acquire information from the DOM and create a parallel structure called the accessibility tree, made up of accessible objects. An accessible object provides information about its role, states, and properties.</p>
     <nav role="navigation" aria-label="Food menu">
         <ul role="menu">
@@ -48,7 +38,7 @@
 
 <div>
   <button id="menubutton" aria-haspopup="true" aria-controls="menu">
-    <img src="hamburger.svg" alt="Page Sections" />
+    Page sections
   </button>
   <ul id="menu" role="menu" aria-labelledby="menubutton">
     <li role="presentation">
@@ -77,17 +67,6 @@
     </li>
   </ul>
 </div>
-
-
-    <script>
-        function toggle_menu(event) {
-            event.preventDefault();
-            const menu_item = event.target.parentElement;
-            const is_expanded = menu_item.getAttribute('aria-expanded') === 'true';
-            menu_item.setAttribute('aria-expanded', !is_expanded);
-        }
-        document.querySelectorAll(".sub-menu").forEach( anchor => anchor.addEventListener('click', toggle_menu));
-    </script>
+<script type="module" src="/src/main.ts"></script>
 </body>
 </html>
-
